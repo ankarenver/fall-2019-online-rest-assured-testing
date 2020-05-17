@@ -45,4 +45,27 @@ public class SpartanTests {
         given().contentType(ContentType.JSON).auth().basic("admin", "admin")
                 .body(jsonFile).baseUri(BASE_URL).when().post("/api/spartans").prettyPeek().then().statusCode(201);
     }
+
+
+    @Test
+    @DisplayName("Delete  some spartan")
+    public void  deleteSpartanTest(){
+
+        // {id}  -- path parameter
+        // YOU CAN NOT DELETE SOMETHING TWICE
+        // we use delete() method to delete something
+        // 204 - NO content, most common status code for successful delete action
+        // authentication - who you are? you need to tell to the server who you are before getting any data
+
+        // ALL HTTP STATUS CODES HAVE SAME MEANING EVERYWHERE
+        // 201 - always after successful POST request
+        // 200 - always after successful GET request
+        // 204 - always after successful DELETE request
+        // 4XX - always after unsuccessful request and it was YOUR FAULT
+
+        given().auth().basic("admin","admin").baseUri(BASE_URL).when()
+                .delete("/api/spartans/{id}",452).prettyPeek().then().statusCode(204);
+
+
+    }
 }
