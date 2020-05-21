@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.given;
 
 public class ORDSTests {
 
-    String BASE_URL = "http://3.90.112.152:1000/ords/hr";
+    String BASE_URL = "http://54.224.118.38:1000/ords/hr";
 
 
     @Test
@@ -54,6 +54,13 @@ public class ORDSTests {
         int statusCode = response.statusCode(); // to save status code in variable
 
         Assertions.assertEquals(200,statusCode);
+
+        //if assertions fails, you will get this kind of message:
+        /*
+         * java.lang.AssertionError: 1 expectation failed.
+         * Expected status code <201> but was <200>.
+         * 200 is always expected status code after GET request
+         */
     }
 
 
@@ -71,6 +78,17 @@ public class ORDSTests {
 
         // second way
 //        given().baseUri(BASE_URL).when().get("/countries").prettyPeek().then().statusCode(200);
+
+    }
+
+    @Test
+    @DisplayName("Get all jobs")
+    public void getAllJobs(){
+//        Response response = given().baseUri(BASE_URL).when().get("/jobs").prettyPeek();
+//        Assertions.assertEquals(200,response.statusCode());
+
+        // second way
+        given().baseUri(BASE_URL).when().get("/jobs").prettyPeek().then().statusCode(200);
 
     }
 }
